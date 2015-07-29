@@ -1,6 +1,6 @@
 # Systemd script for CEPH object storage
 
-**ceph-systemd-service-generator.sh** is a systemd generator (http://www.freedesktop.org/wiki/Software/systemd/Generators/) script which generates Ceph systemd unit files based on Ceph daemons present on current node. It supports multiple clusters on the same node, which generic init-script does not (see my issue http://tracker.ceph.com/issues/12466) and for that it relies on correct OSD and Mon settings in {cluster}.conf.
+**ceph-systemd-service-generator.sh** is a systemd [generator](http://www.freedesktop.org/wiki/Software/systemd/Generators/) script which generates Ceph systemd unit files based on Ceph daemons present on current node. It supports multiple clusters on the same node, which generic init-script does not (see my [issue](http://tracker.ceph.com/issues/12466)) and for that it relies on correct OSD and Mon settings in {cluster}.conf.
 Unit files are based on https://github.com/ceph/ceph/tree/master/systemd with some dependency modifications.
 
 **How it works**:
@@ -31,7 +31,8 @@ Stop all ceph daemons on current host:
 > ```systemctl stop ceph.target```
 
 Put Ceph completely to autostart:
-> ```systemctl enable ceph.target
-systemctl enable ceph-mon.target
-systemctl enable ceph-osd.target
-```
+> systemctl enable ceph.target
+
+> systemctl enable ceph-mon.target
+
+> systemctl enable ceph-osd.target
