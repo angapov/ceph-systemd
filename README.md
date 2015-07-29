@@ -2,6 +2,9 @@
 
 **ceph-systemd-service-generator.sh** is a systemd [generator](http://www.freedesktop.org/wiki/Software/systemd/Generators/) script which generates Ceph systemd unit files based on Ceph daemons present on current node. It supports multiple clusters on the same node, which generic init-script does not (see my [issue](http://tracker.ceph.com/issues/12466)) and for that it relies on correct OSD and Mon settings in {cluster}.conf.
 Unit files are based on https://github.com/ceph/ceph/tree/master/systemd with some dependency modifications.
+It adds more convenient and flexible way to operate a cluster than just plain unit files. It allows not to think about adding more units after adding more OSDs - script automatically detects changes in {cluster}.conf when we issue "systemctl daemon-reload" and creates needed unit files.
+
+The idea is simple - let "systemctl daemon-reload" do all the job for us.
 
 **How it works**:
 > 1. Removes everything like ceph*.service or ceph*.target under /usr/lib/systemd/system directory to ensure we are not using old services.
@@ -20,6 +23,9 @@ Assuming cluster name is "ceph":
 
 Start osd.1:
 > ```systemctl start ceph-osd@1```
+
+Start osd.2 which is not yet in ceph.conf - all the same way (unit file will be automatically created after daemon-reload or at next boot):
+> ```systemctl start ceph-osd@2```
 
 Stop mon.node1:
 > ```systemctl stop ceph-mon@node1```
