@@ -13,7 +13,7 @@ Unit files are based on https://github.com/ceph/ceph/tree/master/systemd with so
 > 7. Places all required symlinks under /etc/systemd/system folder to automatically provide needed dependencies.
 
 **How to install it**:
-```This script must be placed under /usr/lib/systemd/system-generators folder. After that "systemctl daemon-reload" must be issued for systemd to execute generator script. The script gets executed every time systemd is 'daemon-reload'ed or at host boot time before any other service gets loaded (see systemd generators link above).```
+> ```This script must be placed under /usr/lib/systemd/system-generators folder. After that "systemctl daemon-reload" must be issued for systemd to execute generator script. The script gets executed every time systemd is 'daemon-reload'ed or at host boot time before any other service gets loaded (see systemd generators link above).```
 
 **How to use it**:
 Assuming cluster name is "ceph":
@@ -31,8 +31,7 @@ Stop all ceph daemons on current host:
 > ```systemctl stop ceph.target```
 
 Put Ceph completely to autostart:
-> ```
-systemctl enable ceph.target
+> ```systemctl enable ceph.target
 systemctl enable ceph-mon.target
 systemctl enable ceph-osd.target
 ```
